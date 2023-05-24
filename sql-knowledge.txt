@@ -166,6 +166,13 @@ ALTER TABLE A DROP COLUMN c;              - удаление солбца.
 
 DROP TABLE A;                             - удаление таблицы.
 
+--
+ПРЕДСТАВЛЕНИЯ
+
+CREATE VIEW V AS SELECT * FROM A;  - создание представления.
+
+DROP VIEW V;                       - удаление представления.
+
 
 --
 Советы, комменты:
