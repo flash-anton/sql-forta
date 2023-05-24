@@ -141,11 +141,16 @@ SELECT b AS c FROM B WHERE bb ='2'
 
 
 --
-INSERT INTO A(a,b,c) VALUES('a',1,null);
-INSERT INTO A(a,b) VALUES('a',1);
-INSERT INTO A(a,b) SELECT e,d FROM B;
+INSERT INTO A(a,b,c) VALUES('a',1,null);  - вставка всей строки.
+INSERT INTO A(a,b) VALUES('a',1);         - вставка части строки.
+INSERT INTO A(a,b) SELECT e,d FROM B;     - вставка строк из другой таблицы.
 
-CREATE TABLE E AS SELECT * FROM A;
+UPDATE A SET a = 'a' WHERE d = 'd';       - обновление строк.
+
+DELETE FROM A WHERE a = 'a';              - удаление строк.
+TRUNCATE TABLE A;                         - удаление всех строк, быстрее, чем DELETE.
+
+CREATE TABLE E AS SELECT * FROM A;        - создание копии таблицы.
 
 
 --
@@ -164,4 +169,6 @@ CREATE TABLE E AS SELECT * FROM A;
 - Не забывать, что некоторые столбцы могут содержать значение NULL.
 - Для тестов можно использовать только SELECT, например, SELECT 3*2; или SELECT TRIM('  abc  ');.
 - Соединение таблиц или вложенные запросы? По-разному. Зависит от многих факторов. Надо экспериментировать.
-
+- Нельзя удалить строку с PK, на который ссылается строка другой таблицы через FK.
+- Не выполнять DELETE и UPDATE без WHERE во избежание удаления или обновления ВСЕХ СТРОК.
+- В DELETE и UPDATE WHERE следует указывать PK для удаления или обновления одной строки.
