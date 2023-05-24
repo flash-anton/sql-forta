@@ -141,6 +141,14 @@ SELECT b AS c FROM B WHERE bb ='2'
 
 
 --
+INSERT INTO A(a,b,c) VALUES('a',1,null);
+INSERT INTO A(a,b) VALUES('a',1);
+INSERT INTO A(a,b) SELECT e,d FROM B;
+
+CREATE TABLE E AS SELECT * FROM A;
+
+
+--
 Советы, комменты:
 - Разделять всю инфу на мелкие части по столбцам для удобства поиска и сортировки.
 - Всегда определять первичный ключ.
