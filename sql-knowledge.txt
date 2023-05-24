@@ -150,7 +150,21 @@ UPDATE A SET a = 'a' WHERE d = 'd';       - обновление строк.
 DELETE FROM A WHERE a = 'a';              - удаление строк.
 TRUNCATE TABLE A;                         - удаление всех строк, быстрее, чем DELETE.
 
+
+--
 CREATE TABLE E AS SELECT * FROM A;        - создание копии таблицы.
+
+CREATE TABLE A                            - создание таблицы.
+(
+    a INTEGER   NOT NULL    DEFAULT 1,
+    b CHAR(10)
+);
+
+ALTER TABLE A ADD c INTEGER;              - добавление столбца.
+
+ALTER TABLE A DROP COLUMN c;              - удаление солбца.
+
+DROP TABLE A;                             - удаление таблицы.
 
 
 --
