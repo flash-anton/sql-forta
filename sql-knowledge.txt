@@ -175,10 +175,38 @@ DROP VIEW V;                       - удаление представления
 
 
 --
-Хранимые процедуры.
+Хранимые процедуры (19.sql).
 В книге приведена вводная информация, примеры создания и выполнения процедур для Oracle и MS SQL Server.
 Примеры для PostgreSQL портированы самостоятельно.
 PostgreSQL поддерживает хранимые процедуры начиная с 11 версии.
+
+Транзакции в процедурах (20.sql).
+По умолчанию после каждой операции происходит неявный commit.
+Транзакция - успешное выполнение всех операций, либо никакой.
+Транзакция оформляется внутри BEGIN-END блока процедуры как блок:
+    BEGIN
+        ...
+    EXCEPTION
+        WHEN errorCode THEN
+            ...
+        WHEN others THEN
+            raise notice E'Error:\n\tSQLSTATE: %\n\tSQLERRM : %', SQLSTATE, SQLERRM; -- пример выводы инфо об ошибке
+    END;
+insert into ... on conflict do nothing;  -- простой обработчик конфликта вставки.
+
+
+--
+Курсоры (21.sql)
+DECLARE name CURSOR FOR query; -- создание курсора в PostgreSQL 15 (не соответствует книге).
+Поэтапное использование курсора:
+    OPEN cursor;
+    FETCH cursor INTO var;
+    ...
+    CLOSE cursor;
+Использование курсора в цикле:
+    FOR rec IN cursor LOOP
+        use rec;
+    END LOOP;
 
 
 --
