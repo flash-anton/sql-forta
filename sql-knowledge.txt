@@ -210,6 +210,23 @@ DECLARE name CURSOR FOR query; -- создание курсора в PostgreSQL 
 
 
 --
+Ограничения.
+- Первичный ключ.
+    CREATE TABLE A ( id CHAR(10) PRIMARY KEY );
+    ALTER TABLE A ADD CONSTRAIN PRIMARY KEY (id);
+- Внешний ключ.
+    CREATE TABLE B ( a_id CHAR(10) REFERENCES A(id) );
+    ALTER TABLE B ADD CONSTRAIN FOREIGN KEY (a_id) REFERENCES A (id);
+- Уникальный ключ - UNIQUE для столбца в CREATE или ALTER.
+- Ограничение значения столбца - CHECK( price > 0 ), CHECK( sex IN '[MF]' ), ... в CREATE или ALTER.
+- Индексы.
+    CREATE INDEX val_ind ON Table (val);
+- Триггеры.
+    CREATE TRIGGER name AFTER DELETE ON table EXECUTE PROCEDURE funcReturnedTrigger();
+- Административные ограничители прав доступа пользователей.
+
+
+--
 Советы, комменты:
 - Разделять всю инфу на мелкие части по столбцам для удобства поиска и сортировки.
 - Всегда определять первичный ключ.
